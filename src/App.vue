@@ -1,9 +1,9 @@
-<script setup lang="ts">
-import ManageGroups from '@/components/ManageGroups.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <ManageGroups />
+  <div class="container">
+    <router-view />
+  </div>
 </template>
 
 <style scoped lang="scss"></style>
