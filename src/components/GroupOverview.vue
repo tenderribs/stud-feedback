@@ -3,6 +3,7 @@ import { ref, type Ref } from 'vue'
 import { useFeedbackStore } from '@/stores/feedback'
 import FullModal from './FullModal.vue'
 import type { Group } from '@/models/group'
+import SfButton from './SfButton.vue'
 
 const store = useFeedbackStore()
 const showModal = ref(false)
@@ -29,28 +30,45 @@ const submit = () => {
   <div>
     <full-modal v-if="showModal" @close="showModal = false">
       <div>
-        <div>New Group Name</div>
+        <div class="mb-5">
+          <div class="mb-1">New Group Name</div>
+          <input
+            type="text"
+            class="rounded w-full border px-2 py-0.5"
+            v-model="newGroup.name"
+            placeholder="Grade 7"
+          />
+        </div>
 
-        <input type="text" v-model="newGroup.name" placeholder="ex. Grade 7" />
+        <div>
+          <div class="mb-2">Student, phone number (CSV)</div>
+          <textarea
+            class="rounded w-full border px-2 py-0.5"
+            v-model="studentList"
+            placeholder="John, +1 (443) 676-4150&#13;&#10;Jane, +1 (443) 676-4150"
+            rows="15"
+            autocorrect="off"
+            autocomplete="off"
+          ></textarea>
+        </div>
 
-        <div>Students (each on separate line)</div>
-        <textarea
-          v-model="studentList"
-          placeholder="John Doe&#13;&#10;Jane Smith"
-          rows="10"
-          autocorrect="off"
-          autocomplete="off"
-        ></textarea>
-
-        <button class="button" @click="submit">Submit</button>
+        <sf-button icon="bi-check" @click="submit">Submit</sf-button>
       </div>
     </full-modal>
 
-    <button @click="showModal = true" class="button">+ Add new group</button>
+    <sf-button @click="showModal = true" icon="bi-plus" class="mb-8"> New grade </sf-button>
 
-    <div class="list-item" v-for="(group, index) in store.groups" v-bind:key="index">
+    <router-link
+      :to="{
+        name: 'GroupFeedback',
+        params: { idx: index }
+      }"
+      class="w-full flex flex-row justify-center mb-5 px-5 border border-solid p-5 text-xl rounded"
+      v-for="(group, index) in store.groups"
+      v-bind:key="index"
+    >
       {{ group.name }}
-    </div>
+    </router-link>
   </div>
 </template>
 

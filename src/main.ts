@@ -11,6 +11,7 @@ import GroupOverview from './components/GroupOverview.vue'
 
 import App from './App.vue'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 
 const app = createApp(App)
 
@@ -28,12 +29,16 @@ const router = createRouter({
       component: GroupOverview
     },
     {
-      path: '/group/',
-      component: GroupFeedback
+      path: '/group/:idx',
+      name: 'GroupFeedback',
+      component: GroupFeedback,
+      props: true
     },
     {
-      path: '/group/manage',
-      component: ManageGroups
+      path: '/group/:idx/manage',
+      name: 'ManageGroups',
+      component: ManageGroups,
+      props: true
     }
   ]
 })
