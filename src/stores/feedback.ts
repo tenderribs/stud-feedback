@@ -7,10 +7,10 @@ export const useFeedbackStore = defineStore(
   () => {
     const groups: Ref<Group[]> = ref([
       {
-        name: 'Example Grade',
+        name: 'Grade 7',
         members: [
-          { name: 'Stud 1', phone: '12391283912' },
-          { name: 'Stud 2', phone: '12312312312' }
+          { name: 'Candice', phone: '+1 (650) 326-9462' },
+          { name: 'Joe', phone: '+1 420 069 13 37' }
         ]
       }
     ])

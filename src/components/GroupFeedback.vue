@@ -42,19 +42,27 @@ const formValues: Ref<FormEntry[]> = ref([
 const comments: Ref<string> = ref('')
 
 const formResponse = computed(() => {
-  return `${student.value.name}'s Daily Report Card
-
-  Started and completed assignments: ${formValues.value[0].grade}
-  Contributed to group work: ${formValues.value[1].grade}
-  Respected other's space and belongings: ${formValues.value[2].grade}
-  Used technology only when permitted: ${formValues.value[3].grade}
-  `
+  return `*${student.value.name}'s Daily Report Card*
+\n1. Started and completed assignments: *${formValues.value[0].grade}*
+${formValues.value[0].comments ? '> Comment: ' + formValues.value[0].comments : ''}
+\n2. Contributed to group work: *${formValues.value[1].grade}*
+${formValues.value[1].comments ? '> Comment: ' + formValues.value[1].comments : ''}
+\n3. Respected other's space and belongings: *${formValues.value[2].grade}*
+${formValues.value[2].comments ? '> Comment: ' + formValues.value[2].comments : ''}
+\n4. Used technology only when permitted: *${formValues.value[3].grade}*
+${formValues.value[3].comments ? '> Comment: ' + formValues.value[3].comments : ''}
+${comments.value ? '\n_Other comments: ' + comments.value + '_' : ''}`
 })
+
+const reset = () => {
+  formValues.value = [{} as FormEntry, {} as FormEntry, {} as FormEntry, {} as FormEntry]
+  comments.value = ''
+}
 </script>
 
 <template>
   <div>
-    <div class="flex flex-row justify-between mb-5">
+    <div class="flex flex-row justify-between items-center mb-5">
       <router-link
         :to="{
           name: 'GroupOverview'
@@ -63,19 +71,22 @@ const formResponse = computed(() => {
         <sf-button :icon="'bi-arrow-left-short'">Back</sf-button>
       </router-link>
 
+      <span>({{ currStudent + 1 }}/{{ group.members.length }})</span>
+
       <router-link
         :to="{
           name: 'ManageGroup',
           params: { idx: groupIndex }
         }"
       >
-        <sf-button :icon="'bi-pen'" icon-right>Edit class</sf-button>
+        <sf-button :icon="'bi-pen'" icon-right>Edit</sf-button>
       </router-link>
     </div>
 
-    <div class="h-screen" v-if="group.members.length > 0">
-      <div class="text-center text-xl font-bold mb-5">{{ group.members[currStudent].name }}</div>
-
+    <div class="mb-20" v-if="group.members.length > 0">
+      <div class="w-full text-center text-2xl font-bold mb-3">
+        {{ group.members[currStudent].name }}
+      </div>
       <div class="mb-5">
         <form-item
           v-model="formValues[0].grade"
@@ -84,18 +95,16 @@ const formResponse = computed(() => {
         ></form-item>
         <textarea
           v-model.lazy="formValues[0].comments"
-          name="remarks "
-          class="rounded w-full border px-2 py-0.5"
-          rows="2"
+          class="rounded w-full border p-2"
+          rows="1"
         ></textarea>
       </div>
       <div class="mb-5">
         <form-item v-model="formValues[1].grade" :header="'Contributed to group work'"></form-item>
         <textarea
           v-model="formValues[1].comments"
-          name="remarks "
-          class="rounded w-full border px-2 py-0.5"
-          rows="2"
+          class="rounded w-full border p-2"
+          rows="1"
         ></textarea>
       </div>
       <div class="mb-5">
@@ -105,9 +114,8 @@ const formResponse = computed(() => {
         ></form-item>
         <textarea
           v-model="formValues[2].comments"
-          name="remarks "
-          class="rounded w-full border px-2 py-0.5"
-          rows="2"
+          class="rounded w-full border p-2"
+          rows="1"
         ></textarea>
       </div>
       <div class="mb-5">
@@ -117,29 +125,21 @@ const formResponse = computed(() => {
         ></form-item>
         <textarea
           v-model="formValues[3].comments"
-          name="remarks "
-          class="rounded w-full border px-2 py-0.5"
-          rows="2"
+          class="rounded w-full border p-2"
+          rows="1"
         ></textarea>
       </div>
 
       <div class="mt-5">
         <div class="text-center">Other comments</div>
-        <textarea
-          v-model="comments"
-          name="remarks "
-          class="rounded w-full border px-2 py-0.5"
-          rows="2"
-        ></textarea>
+        <textarea v-model="comments" class="rounded w-full border p-2" rows="4"></textarea>
       </div>
-
-      <!-- <p>{{ formResponse }}</p> -->
 
       <div
         class="fixed left-8 right-8 bottom-5 flex flex-row justify-between bg-gray-100 rounded p-2"
       >
         <sf-button
-          @click="currStudent = Math.max(0, currStudent - 1)"
+          @click="(currStudent = Math.max(0, currStudent - 1)), reset()"
           :disabled="currStudent === 0"
           icon="bi-arrow-left"
         >
@@ -148,8 +148,8 @@ const formResponse = computed(() => {
 
         <a :href="'https://wa.me/' + cleanedNumber + '?text=' + encodeURI(formResponse)"
           ><sf-button
-            icon="bi-share"
-            class="bg-green-100"
+            icon="bi-whatsapp"
+            class="bg-green-200"
             :disabled="!formValues.every((formval: FormEntry) => formval.grade !== undefined)"
           >
             Share
@@ -157,7 +157,7 @@ const formResponse = computed(() => {
         >
 
         <sf-button
-          @click="currStudent = Math.min(group.members.length - 1, currStudent + 1)"
+          @click="(currStudent = Math.min(group.members.length - 1, currStudent + 1)), reset()"
           icon="bi-arrow-right"
           :disabled="currStudent === group.members.length - 1"
           icon-right
