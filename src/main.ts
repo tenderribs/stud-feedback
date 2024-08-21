@@ -30,6 +30,11 @@ const router = createRouter({
       component: GroupOverview
     },
     {
+      path: '/more-info',
+      name: 'MoreInfo',
+      component: MoreInfo
+    },
+    {
       path: '/group/:idx',
       name: 'GroupFeedback',
       component: GroupFeedback,
@@ -40,11 +45,6 @@ const router = createRouter({
       name: 'ManageGroup',
       component: ManageGroup,
       props: true
-    },
-    {
-      path: '/more-info',
-      name: 'MoreInfo',
-      component: MoreInfo
     }
   ]
 })

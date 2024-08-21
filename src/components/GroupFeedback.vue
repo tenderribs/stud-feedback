@@ -58,6 +58,10 @@ const reset = () => {
   formValues.value = [{} as FormEntry, {} as FormEntry, {} as FormEntry, {} as FormEntry]
   comments.value = ''
 }
+
+const formComplete = computed((): boolean => {
+  return formValues.value.every((formval: FormEntry) => formval.grade !== undefined)
+})
 </script>
 
 <template>
@@ -149,8 +153,8 @@ const reset = () => {
         <a :href="'https://wa.me/' + cleanedNumber + '?text=' + encodeURI(formResponse)"
           ><sf-button
             icon="bi-whatsapp"
-            class="bg-green-200"
-            :disabled="!formValues.every((formval: FormEntry) => formval.grade !== undefined)"
+            :class="formComplete ? 'bg-green-400 text-white' : 'bg-green-200'"
+            :disabled="!formComplete"
           >
             Share
           </sf-button></a
