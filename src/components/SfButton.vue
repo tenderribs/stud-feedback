@@ -12,7 +12,7 @@ const props = defineProps<{
     :disabled="disabled"
     :class="[
       icon && iconRight ? 'flex-row-reverse' : 'flex-row',
-      disabled ? 'bg-gray-200 text-gray-200' : ''
+      disabled ? 'bg-gray-200 text-gray-200 cursor-not-allowed' : ''
     ]"
   >
     <i v-if="icon" :class="['bi ', props.icon, iconRight ? 'pl-2' : 'pr-2']"> </i>

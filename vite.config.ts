@@ -13,7 +13,7 @@ export default defineConfig({
       manifest: {
         name: 'Daily Reports',
         short_name: 'DailyReports',
-        description: 'Give Students Daily Reports',
+        description: 'Give students daily reports and easily send them onwards to parents',
         theme_color: '#ffffff',
         icons: [
           {
@@ -25,6 +25,22 @@ export default defineConfig({
             src: 'pwa-512x512.png',
             sizes: '512x512',
             type: 'image/png'
+          }
+        ],
+        screenshots: [
+          {
+            src: 'screenshot-wide.png',
+            sizes: '2360x1640',
+            type: 'image/png',
+            form_factor: 'wide',
+            label: 'Daily Reports'
+          },
+          {
+            src: 'screenshot-nrw.png',
+            sizes: '1170x2522',
+            type: 'image/png',
+            form_factor: 'narrow',
+            label: 'Daily Reports'
           }
         ]
       },
