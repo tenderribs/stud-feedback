@@ -63,7 +63,14 @@ const formResponse = computed(() => {
         <sf-button :icon="'bi-arrow-left-short'">Back</sf-button>
       </router-link>
 
-      <sf-button :icon="'bi-pen'" icon-right>Edit class</sf-button>
+      <router-link
+        :to="{
+          name: 'ManageGroup',
+          params: { idx: groupIndex }
+        }"
+      >
+        <sf-button :icon="'bi-pen'" icon-right>Edit class</sf-button>
+      </router-link>
     </div>
 
     <div class="h-screen" v-if="group.members.length > 0">
