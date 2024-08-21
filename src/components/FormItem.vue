@@ -14,12 +14,12 @@ const clicked = (option: string) => {
 <template>
   <div class="flex flex-col items-center mb-2">
     <span class="text-md mb-1">{{ props.header }}</span>
-    <div class="flex flex-row justify-around">
+    <div class="w-full flex flex-row justify-between">
       <button
         v-for="letter in letters"
         v-bind:key="letter"
         @click="clicked(letter)"
-        class="px-3 py-1.5 mx-5 rounded font-bold bg-gray-100 border-solid"
+        class="px-5 py-2 rounded font-bold bg-gray-100 border-solid"
         :class="{ selected: letter == model }"
       >
         {{ letter }}
