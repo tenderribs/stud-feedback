@@ -2,7 +2,7 @@
 import { ref, type Ref } from 'vue'
 import { useFeedbackStore } from '@/stores/feedback'
 import FullModal from './FullModal.vue'
-import type { Group } from '@/models/group'
+import type { Group } from '@/models/models'
 import SfButton from './SfButton.vue'
 
 const store = useFeedbackStore()
@@ -15,9 +15,14 @@ const submit = () => {
   if (!newGroup.value || !studentList.value) return
   if (!newGroup.value.name.length || !studentList.value.length) return
 
+  const rows = studentList.value.split('\n')
+
   store.groups.push({
     name: newGroup.value.name,
-    members: studentList.value.split('\n')
+    members: rows.map((row: string) => {
+      const [name, phone] = row.split(',', 2)
+      return { name, phone }
+    })
   })
 
   // reset the group value
@@ -52,7 +57,7 @@ const submit = () => {
           ></textarea>
         </div>
 
-        <sf-button icon="bi-check" @click="submit">Submit</sf-button>
+        <sf-button icon="bi-check" @click="submit">Done</sf-button>
       </div>
     </full-modal>
 
