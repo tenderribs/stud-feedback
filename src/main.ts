@@ -8,6 +8,7 @@ import { createRouter, createMemoryHistory } from 'vue-router'
 import ManageGroup from './components/ManageGroup.vue'
 import GroupFeedback from './components/GroupFeedback.vue'
 import GroupOverview from './components/GroupOverview.vue'
+import MoreInfo from './components/MoreInfo.vue'
 
 import App from './App.vue'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
@@ -39,6 +40,11 @@ const router = createRouter({
       name: 'ManageGroup',
       component: ManageGroup,
       props: true
+    },
+    {
+      path: '/more-info',
+      name: 'MoreInfo',
+      component: MoreInfo
     }
   ]
 })

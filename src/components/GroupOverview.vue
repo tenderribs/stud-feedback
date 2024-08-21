@@ -14,14 +14,19 @@ const groups = computed(() => {
 
 <template>
   <div>
-    <router-link
-      :to="{
-        name: 'ManageGroup',
-        params: { idx: 'new' }
-      }"
-    >
-      <sf-button icon="bi-plus" class="mb-8"> New class </sf-button>
-    </router-link>
+    <div class="flex flex-row justify-between">
+      <router-link
+        :to="{
+          name: 'ManageGroup',
+          params: { idx: 'new' }
+        }"
+      >
+        <sf-button icon="bi-plus" class="mb-8"> New class </sf-button>
+      </router-link>
+      <router-link class="text-gray-500" :to="{ name: 'MoreInfo' }">
+        <sf-button icon="bi-info-circle " icon-right>Info</sf-button>
+      </router-link>
+    </div>
 
     <router-link
       :to="{
