@@ -73,7 +73,7 @@ const icon = ref('bi-save')
   <div>
     <sf-button @click="$router.go(-1)" icon="bi-arrow-left" class="mb-5">Back</sf-button>
     <div class="mb-5">
-      <div class="mb-1">Class Name</div>
+      <div class="mb-1">Class name</div>
       <input
         type="text"
         class="rounded w-full border px-2 py-0.5"
