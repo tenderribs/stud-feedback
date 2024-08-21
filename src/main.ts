@@ -5,7 +5,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { createRouter, createMemoryHistory } from 'vue-router'
 
-import ManageGroups from './components/ManageGroup.vue'
+import ManageGroup from './components/ManageGroup.vue'
 import GroupFeedback from './components/GroupFeedback.vue'
 import GroupOverview from './components/GroupOverview.vue'
 
@@ -36,8 +36,8 @@ const router = createRouter({
     },
     {
       path: '/group/:idx/manage',
-      name: 'ManageGroups',
-      component: ManageGroups,
+      name: 'ManageGroup',
+      component: ManageGroup,
       props: true
     }
   ]
