@@ -8,7 +8,7 @@ const props = defineProps<{
 
 <template>
   <button
-    class="border border-solid py-1.5 px-3 rounded flex items-center cursor-pointer select-none bg-white"
+    class="border border-solid py-1.5 px-3 rounded flex items-center cursor-pointer select-none"
     :disabled="disabled"
     :class="[
       icon && iconRight ? 'flex-row-reverse' : 'flex-row',

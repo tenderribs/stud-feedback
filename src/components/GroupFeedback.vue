@@ -146,6 +146,7 @@ const formComplete = computed((): boolean => {
           @click="(currStudent = Math.max(0, currStudent - 1)), reset()"
           :disabled="currStudent === 0"
           icon="bi-arrow-left"
+          class="bg-white"
         >
           Prev
         </sf-button>
@@ -165,6 +166,7 @@ const formComplete = computed((): boolean => {
           icon="bi-arrow-right"
           :disabled="currStudent === group.members.length - 1"
           icon-right
+          class="bg-white"
         >
           Next
         </sf-button>
